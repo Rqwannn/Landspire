@@ -45,9 +45,9 @@ export default {
         title: 'Certificate File',
       },
       {
-        name: 'isCertificateImageNft',
+        name: 'isCertificateNft',
         type: 'boolean',
-        title: 'Is Certificate Image NFT',
+        title: 'Is Certificate NFT',
       },
       {
         name: 'timestamp',

@@ -16,3 +16,5 @@ export async function testSanity() {
     console.log(`Number of data ${data}`); // set to `false` to by
     
 }
+
+export default client
