@@ -6,7 +6,7 @@ const client = createClient({
     name: 'default',
     title: 'Landspire',
     projectId: 'uqsv68h3',
-    dataset: 'production',
+    dataset: 'certificate',
     useCdn: true,
     apiVersion: '2024-07-11',
 });

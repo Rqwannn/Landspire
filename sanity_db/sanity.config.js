@@ -8,7 +8,7 @@ export default defineConfig({
   title: 'Landspire',
 
   projectId: 'uqsv68h3',
-  dataset: 'production',
+  dataset: 'certificate',
 
   plugins: [structureTool(), visionTool()],
 
