@@ -4,16 +4,6 @@ export default {
     title: 'Users',
     fields: [
       {
-        name: 'name',
-        type: 'string',
-        title: 'Name',
-      },
-      {
-        name: 'nik',
-        type: 'string',
-        title: 'NIK',
-      },
-      {
         name: 'walletAddress',
         type: 'string',
         title: 'Wallet Address',
