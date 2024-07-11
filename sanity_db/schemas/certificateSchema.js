@@ -10,6 +10,16 @@ export default {
         type: 'string',
       },
       {
+        name: 'name_owner',
+        type: 'string',
+        title: 'Nama Pemilik',
+      },
+      {
+        name: 'nik',
+        type: 'string',
+        title: 'NIK',
+      },
+      {
         name: 'ownership_rights',
         type: 'string',
         title: 'Ownership Rights',
@@ -35,9 +45,9 @@ export default {
         title: 'Certificate File',
       },
       {
-        name: 'isCertificateImageNft',
+        name: 'isCertificateNft',
         type: 'boolean',
-        title: 'Is Certificate Image NFT',
+        title: 'Is Certificate NFT',
       },
       {
         name: 'timestamp',
@@ -45,8 +55,8 @@ export default {
         title: 'Timestamp',
       },
       {
-        name: 'author',
-        title: 'Author',
+        name: 'account',
+        title: 'Account',
         type: 'reference',
         to: [{ type: 'users' }],
       },
