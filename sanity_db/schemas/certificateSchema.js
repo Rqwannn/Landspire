@@ -25,6 +25,11 @@ export default {
         title: 'Land Address ',
       },
       {
+        name: 'land_area',
+        type: 'string',
+        title: 'Land Area',
+      },
+      {
         name: 'certificate_file',
         type: 'string',
         title: 'Certificate File',
