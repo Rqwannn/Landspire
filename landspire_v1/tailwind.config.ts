@@ -13,6 +13,16 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        "landspire_black": "#2b2b2b",
+        "landspire_red":"#b51f1f",
+        "landspire_blue":"#003f6b",
+        "landspire_yellow":"#ffba35",
+        "landspire_white":"#ffff",
+        "landspire_gray":"#f2f2f2",
+        "landspire_dark_gray":"#d90909",
+        "landspire_pastel":"#d9d9d9"
+      }
     },
   },
   plugins: [],
