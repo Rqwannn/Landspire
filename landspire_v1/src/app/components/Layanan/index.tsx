@@ -13,8 +13,8 @@ const Layanan = () => {
             <Image src="/assets/imgs/layanan1.png" width={500} height={500} alt='layanan' className='rounded-sm hover:scale-[110%] duration-500' />
           </div>
           <div>
-            <h1>Digitalisasi Sertipikat HAT</h1>
-            <Link href="#" className='text-xs hover:text-landspire_yellow duration-300 text-landspire_blue'>Pelajari selengkapnya</Link>
+            <h1>Digitization of Land Rights Certificates</h1>
+            <Link href="Formsertif" className='text-xs hover:text-landspire_yellow duration-300 text-landspire_blue'>Learn more</Link>
           </div>
         </div>
 
@@ -23,8 +23,9 @@ const Layanan = () => {
             <Image src="/assets/imgs/layanan2.png" width={500} height={500} alt='layanan' className='rounded-sm hover:scale-[110%] duration-500' />
           </div>
           <div>
-            <h1>Permohonan Balik Nama HAT</h1>
-            <Link href="#" className='text-xs hover:text-landspire_yellow duration-300 text-landspire_blue'>Pelajari selengkapnya</Link>
+            <h1>Transfer Land Rights</h1>
+            <br />
+            <Link href="FormBalikNama" className='text-xs hover:text-landspire_yellow duration-300 text-landspire_blue'>Learn more</Link>
           </div>
         </div>
 
@@ -33,8 +34,9 @@ const Layanan = () => {
             <Image src="/assets/imgs/layanan3.png" width={500} height={500} alt='layanan' className='rounded-sm hover:scale-[110%] duration-500' />
           </div>
           <div>
-            <h1>Pelaporan Kasus Hukum Tanah</h1>
-            <Link href="#" className='text-xs hover:text-landspire_yellow duration-300 text-landspire_blue'>Pelajari selengkapnya</Link>
+            <h1>Reporting Land Law Cases</h1>
+            <br />
+            <Link href="laporankasus" className='text-xs hover:text-landspire_yellow duration-300 text-landspire_blue'>Learn more</Link>
           </div>
         </div>
 
@@ -43,8 +45,9 @@ const Layanan = () => {
             <Image src="/assets/imgs/layanan4.png" width={500} height={500} alt='layanan' className='rounded-sm hover:scale-[110%] duration-500' />
           </div>
           <div>
-            <h1>Permohonan Peralihan Hak</h1>
-            <Link href="#" className='text-xs hover:text-landspire_yellow duration-300 text-landspire_blue'>Pelajari selengkapnya</Link>
+            <h1>Certificates</h1>
+            <br />
+            <Link href="search" className='text-xs hover:text-landspire_yellow duration-300 text-landspire_blue'>Search certificate</Link>
           </div>
         </div>
       </div>

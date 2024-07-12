@@ -2,7 +2,7 @@ const FormBalikNama = () => {
     return (
         <>
         <div className="w-full flex flex-col items-center">
-            <h1 className="text-2xl text-center my-10 font-semibold">Form Balik Nama HAT</h1>
+            <h1 className="text-center my-[72px] text-landspire_blue text-3xl font-semibold">Form Transfer Land Rights</h1>
 
             <form action="" className="bg-landspire_white w-[90%] mb-10 flex flex-col items-center p-10 drop-shadow-md rounded-md">
                 <div className="flex">

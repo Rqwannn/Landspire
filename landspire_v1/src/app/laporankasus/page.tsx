@@ -4,8 +4,8 @@ const laporankasus = () => {
   return (
     <>
       {/* Search feature */}
-      <form action="" className="flex justify-center w-full w-max-[95%] gap-10 my-10 items-center">
-        <h1 className="text-2xl font-semibold">Case Report</h1>
+      <form action="" className="flex flex-col justify-center w-full w-max-[95%] gap-10 my-10 items-center">
+        <h1 className="text-center my-[32px] text-landspire_blue text-3xl font-semibold">Case Report</h1>
         <input type="text" className="border-landspire_dark_gray border-2 py-3 px-5 w-[620px] rounded-xl box-border" placeholder="Find case report..." />
         <p className="text-landspire_blue hover:text-landspire_yellow  cursor-pointer">Make a report</p>
       </form>

@@ -50,17 +50,8 @@ const getEthereumContract = async () => {
 const Formsertif = () => {
     const [change, isChange] = useState(false)
     const { currentAccount, setAppStatus } = useContext(LandspireContext)
-    const router = useRouter()
-  
-    // const [namaPemilik, setNamaPemilik] = useState('')
-    // const [CertificatesID, setCertificatesID] = useState('')
-    // const [CertificateFile, setCertificateFile] = useState<File>()
-    // const [NIK, setNIK] = useState('')
-    // const [ownershipRights, setOwnershipRight] = useState('')
-    // const [dateOfIssuance, setDateOfIssuance] = useState('')
-    // const [landAddress, setLandAddress] = useState('')
-    // const [landArea, setLandArea] = useState('')
     const [status, setStatus] = useState('initial')
+    const router = useRouter()
 
     
 
@@ -196,7 +187,9 @@ const Formsertif = () => {
 
     return (
         <div className=" my-8 mx-12">
-            <Header textHeader="DIGITALISASI SERTIFIKAT HAT"/>
+          <h1 className="text-center my-[72px] text-landspire_blue text-3xl font-semibold">Form of Land Rights Certificates</h1>
+            {/* <Header textHeader="Digitization of Land Rights Certificates"/> */}
+
             <form onSubmit={onSubmit} className="form mt-8 grid grid-cols-1 lg:grid-cols-3 justify-center">
                 <div className="uploadCertificate flex flex-col p-4 gap-4 w-fit">
                     <p>UPLOAD CERTIFICATE</p>
@@ -230,7 +223,9 @@ const Formsertif = () => {
                         <div className="input gap-2 flex flex-col">
                             <label htmlFor="name">Ownership Rights<span className="text-landspire_red">*</span></label>
                             <select className="border-2 border-gray-300 rounded-md p-1" name="ownershipRights" id="ownershipRights" required>
-                                <option value="test">Freehold, Leasehold, Land Use Rights, etc</option>
+                                <option value="Freehold">Freehold</option>
+                                <option value="Leasehold">Leasehold</option>
+                                <option value="Land Use Rights">Land Use Rights</option>
                             </select>
                         </div>
                         <div className="input gap-2 flex flex-col">
