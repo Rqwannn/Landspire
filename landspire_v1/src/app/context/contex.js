@@ -2,7 +2,7 @@
 
 import { createContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { client } from '@/app/lib/sanity'
+import { client } from '@/app/libs/sanity'
 
 export const LandspireContext = createContext()
 

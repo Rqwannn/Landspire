@@ -26,13 +26,13 @@ export default {
       },
       {
         name: 'date_of_issuance',
-        type: 'string',
+        type: 'datetime',
         title: 'Date of Issuance',
       },
       {
         name: 'land_address',
         type: 'string',
-        title: 'Land Address ',
+        title: 'Land Address',
       },
       {
         name: 'land_area',
