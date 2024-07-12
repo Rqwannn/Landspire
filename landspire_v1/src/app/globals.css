@@ -26,4 +26,53 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .logo{
+    z-index: -1;
+  }
+
+  .chat {
+    left: 80px;
+    right: 80px;
+    bottom: 30px;
+  }
+
+  .chat input{
+    border: none;
+    margin-right: 14px;
+  }
+
+  .chat-window{
+    flex: 1;
+    z-index: 999;
+    overflow-y: auto;
+    display: flex;
+    position: absolute;
+    flex-direction: column-reverse;
+    padding: 10px 72px;
+    height: 77vh;
+    width: 100%;
+    /* background-color: black; */
+  }
+
+  .bubble {
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+    max-width: 50%;
+}
+
+.bubble.user {
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end;
+}
+
+.bubble.bot {
+    background-color: #e0e0e0;
+    color: #000;
+    align-self: flex-start;
+}
+
 }
