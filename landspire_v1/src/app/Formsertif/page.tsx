@@ -52,17 +52,19 @@ const Formsertif = () => {
     const { currentAccount, setAppStatus } = useContext(LandspireContext)
     const router = useRouter()
   
-    const [namaPemilik, setNamaPemilik] = useState('')
-    const [CertificatesID, setCertificatesID] = useState('')
-    const [CertificateFile, setCertificateFile] = useState<File>()
-    const [NIK, setNIK] = useState('')
-    const [ownershipRights, setOwnershipRight] = useState('')
-    const [dateOfIssuance, setDateOfIssuance] = useState('')
-    const [landAddress, setLandAddress] = useState('')
-    const [landArea, setLandArea] = useState('')
+    // const [namaPemilik, setNamaPemilik] = useState('')
+    // const [CertificatesID, setCertificatesID] = useState('')
+    // const [CertificateFile, setCertificateFile] = useState<File>()
+    // const [NIK, setNIK] = useState('')
+    // const [ownershipRights, setOwnershipRight] = useState('')
+    // const [dateOfIssuance, setDateOfIssuance] = useState('')
+    // const [landAddress, setLandAddress] = useState('')
+    // const [landArea, setLandArea] = useState('')
     const [status, setStatus] = useState('initial')
 
-     const mint = async () => {
+    
+
+     const mint = async ({namaPemilik, CertificatesID, CertificateFile, NIK, ownershipRights, dateOfIssuance, landAddress, landArea}) => {
       if (!namaPemilik || !NIK || !CertificateFile) return
       setStatus('loading')
   
@@ -116,10 +118,12 @@ const Formsertif = () => {
           nik: NIK,
           ownership_rights: ownershipRights,
           date_of_issuance: dateOfIssuance,
+          certificate_file: ipfsFileHash,
+          isCertificateNft: true,
           land_address: landAddress,
           land_area: landArea,
           timestamp: new Date(Date.now()).toISOString(),
-          author: {
+          account: {
             _key: CertificatesID,
             _ref: currentAccount,
             _type: 'reference',
@@ -168,7 +172,7 @@ const Formsertif = () => {
             const fileSize = file.files.item(i).size
             const actfileSize = Math.round((fileSize / 1024))
     
-            if (actfileSize > 2096) {
+            if (actfileSize > 25096) {
                 document.getElementById("warning").innerText = "File Terlalu Besar!"
                 e.target.value = "";
             } else {
@@ -176,13 +180,25 @@ const Formsertif = () => {
                 isChange(!change)
             }
         }
+
     }        
+    async function onSubmit(event: FormEvent<HTMLFormElement>) {
+        event?.preventDefault();
+
+        let dataList = {};            
+        const formData = new FormData(event.currentTarget)
+        for (let data of formData) {
+            dataList[data[0]] = data[1]
+            console.log(dataList)
+        }
+        mint(dataList)
+    }
 
     return (
         <div className=" my-8 mx-12">
             <Header textHeader="DIGITALISASI SERTIFIKAT HAT"/>
-            <form className="form mt-8 grid grid-cols-1 lg:grid-cols-3 justify-center">
-                <div className="uploadCertificate flex flex-col p-4 gap-4">
+            <form onSubmit={onSubmit} className="form mt-8 grid grid-cols-1 lg:grid-cols-3 justify-center">
+                <div className="uploadCertificate flex flex-col p-4 gap-4 w-fit">
                     <p>UPLOAD CERTIFICATE</p>
                     <div className={`input gap-2 flex flex-col`}>
                         <label htmlFor="certificateUpload" className={`cursor-pointer ${change ? "hidden" : "visible"}`}>
@@ -194,40 +210,40 @@ const Formsertif = () => {
                             />
                         </label>
                         <p id="warning" className="text-landspire_red"></p>
-                        <input accept="application/pdf" className={change ? "visible" : "hidden"} type="file" name="certificateUpload" id="certificateUpload" onChange={dataMasuk}/>
+                        <input accept="application/pdf" className={change ? "visible" : "hidden"} type="file" name="CertificateFile" id="certificateUpload" onChange={dataMasuk}/>
                     </div>
                 </div>
-                <div className="form_input bg-white p-4">
-                    <div className="flex flex-col gap-2">
+                <div className="form_input bg-white p-4 rounded-md">
+                    <div className="flex flex-col gap-2 p-4">
                         <div className="input gap-2 flex flex-col">
                             <label htmlFor="name">Name<span className="text-landspire_red">*</span></label>
-                            <input className="border-2 border-gray-300 rounded-md p-1" type="text" name="name" id="name"/>
+                            <input className="border-2 border-gray-300 rounded-md px-3 py-1" type="text" name="namaPemilik" id="name" required/>
                         </div>
                         <div className="input gap-2 flex flex-col">
                             <label htmlFor="nik">NIK<span className="text-landspire_red">*</span></label>
-                            <input className="border-2 border-gray-300 rounded-md p-1" type="text" name="nik" id="nik"/>
+                            <input className="border-2 border-gray-300 rounded-md px-3 py-1" type="text" name="NIK" id="nik" required/>
                         </div>
                         <div className="input gap-2 flex flex-col">
                             <label htmlFor="certificateId">Certificate ID<span className="text-landspire_red">*</span></label>
-                            <input className="border-2 border-gray-300 rounded-md p-1" type="text" name="certificateId" id="certificateId"/>
+                            <input className="border-2 border-gray-300 rounded-md px-3 py-1" type="text" name="CertificatesID" id="certificateId" required/>
                         </div>
                         <div className="input gap-2 flex flex-col">
                             <label htmlFor="name">Ownership Rights<span className="text-landspire_red">*</span></label>
-                            <select className="border-2 border-gray-300 rounded-md p-1" name="ownershipRights" id="ownershipRights">
+                            <select className="border-2 border-gray-300 rounded-md p-1" name="ownershipRights" id="ownershipRights" required>
                                 <option value="test">Freehold, Leasehold, Land Use Rights, etc</option>
                             </select>
                         </div>
                         <div className="input gap-2 flex flex-col">
                             <label htmlFor="dateOfIssuance">Date of Issuance<span className="text-landspire_red">*</span></label>
-                            <input className="border-2 border-gray-300 rounded-md p-1" type="date" name="dateOfIssuance" id="dateOfIssuance"/>
+                            <input className="border-2 border-gray-300 rounded-md px-3 py-1" type="date" name="dateOfIssuance" id="dateOfIssuance" required/>
                         </div>
                         <div className="input gap-2 flex flex-col">
                             <label htmlFor="landAddress">Land Address<span className="text-landspire_red">*</span></label>
-                            <input className="border-2 border-gray-300 rounded-md p-1" type="text" name="landAddress" id="landAddress"/>
+                            <input className="border-2 border-gray-300 rounded-md px-3 py-1" type="text" name="landAddress" id="landAddress" required/>
                         </div>
                         <div className="input gap-2 flex flex-col">
                             <label htmlFor="landArea">Land Area<span className="text-landspire_red">*</span></label>
-                            <input className="border-2 border-gray-300 rounded-md p-1" type="text" name="landArea" id="landArea"/>
+                            <input className="border-2 border-gray-300 rounded-md px-3 py-1" type="text" name="landArea" id="landArea" required/>
                         </div>
                         <div className="submitbutton mt-2">
                             <button type="submit" className="block w-[100%] bg-landspire_blue text-white rounded-md p-2">Submit</button>

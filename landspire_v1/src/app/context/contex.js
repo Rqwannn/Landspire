@@ -6,7 +6,7 @@ import { client } from '@/app/libs/sanity'
 
 export const LandspireContext = createContext()
 
-export const LandspireProvider = ({ children }) => {
+const LandspireProvider = ({ children }) => {
   const [appStatus, setAppStatus] = useState('')
   const [currentAccount, setCurrentAccount] = useState('')
   const [certificates, setCertificate] = useState('')
@@ -16,10 +16,12 @@ export const LandspireProvider = ({ children }) => {
     checkIfWalletIsConnected()
   }, [])
 
-  useEffect(() => {
-    if (!currentAccount && appStatus == 'connected') return
-    createUserAccount(currentAccount)
-  }, [currentAccount, appStatus])
+  // useEffect(() => {
+  //   if (currentAccount && appStatus == 'connected') {
+  //     return
+  //   }
+  //   createUserAccount(currentAccount)
+  // }, [currentAccount, appStatus])
 
 
   const checkIfWalletIsConnected = async () => {
@@ -31,14 +33,13 @@ export const LandspireProvider = ({ children }) => {
       if (addressArray.length > 0) {
         setAppStatus('connected')
         setCurrentAccount(addressArray[0])
-
         createUserAccount(addressArray[0])
       } else {
-        router.push('/')
+        // router.push('/')
         setAppStatus('notConnected')
       }
     } catch (err) {
-      router.push('/')
+      // router.push('/')
       setAppStatus('error')
     }
   }
@@ -146,6 +147,7 @@ export const LandspireProvider = ({ children }) => {
         appStatus,
         currentAccount,
         certificates,
+        checkIfWalletIsConnected,
         connectWallet,
         setAppStatus,
         getNftCertificate,
@@ -156,3 +158,5 @@ export const LandspireProvider = ({ children }) => {
     </LandspireContext.Provider>
   )
 }
+
+export default LandspireProvider;

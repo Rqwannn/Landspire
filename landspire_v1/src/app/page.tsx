@@ -1,7 +1,14 @@
+"use client"
+import { useContext } from "react";
 import HeroImage from "./components/Hero";
 import Layanan from "./components/Layanan";
+import { LandspireContext } from "./context/contex";
 
 export default function Home() {
+  // const { checkIfWalletIsConnected } = useContext(LandspireContext)
+
+  // checkIfWalletIsConnected()
+
   return (
     <>
       <HeroImage />
