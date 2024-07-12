@@ -13,7 +13,7 @@ const Navbar = () => {
                     <li className="hover:bg-[#424ab6] py-1 px-2 rounded-lg duration-300"><Link href="/">Wallet</Link></li>
                     <li className="hover:bg-[#424ab6] py-1 px-2 rounded-lg duration-300"><Link href="/">Service</Link></li>
                     <li className="hover:bg-[#424ab6] py-1 px-2 rounded-lg duration-300"><Link href="/">Contact</Link></li>
-                    <li className="hover:bg-[#424ab6] py-1 px-2 rounded-lg duration-300"><Link href="/">Login</Link></li>
+                    {/* <li className="hover:bg-[#424ab6] py-1 px-2 rounded-lg duration-300"><Link href="/">Login</Link></li> */}
                 </ul>
             </div>
         </nav>

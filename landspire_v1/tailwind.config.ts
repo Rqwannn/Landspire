@@ -20,7 +20,7 @@ const config: Config = {
         "landspire_yellow":"#FFBA35",
         "landspire_white":"#ffffff",
         "landspire_gray":"#f2f2f2",
-        "landspire_dark_gray":"#d90909",
+        "landspire_dark_gray":"#a9a9a9",
         "landspire_pastel":"#d9d9d9"
       }
     },
