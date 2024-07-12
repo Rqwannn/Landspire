@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Navbar = () => {
     return (
-        <nav className="bg-landspire_blue flex justify-between px-[72px] py-4 text-landspire_white">
+        <nav className="bg-landspire_blue min-h-[40px] flex justify-between px-[72px] py-4 text-landspire_white">
             <div className="flex flex-row gap-3">
                 <img src="/assets/logos/logo.png" alt="lanspire" width={32} height={32} />
                 <p className="title italic text-xl ">Landspire</p>
