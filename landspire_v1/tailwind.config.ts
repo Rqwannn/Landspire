@@ -22,7 +22,10 @@ const config: Config = {
         "landspire_gray":"#f2f2f2",
         "landspire_dark_gray":"#d90909",
         "landspire_pastel":"#d9d9d9"
-      }
+      },
+      gridTemplateColumns: {
+        "form": "1fr 2fr 1fr"
+      },
     },
   },
   plugins: [],
