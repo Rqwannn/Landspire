@@ -1,10 +1,164 @@
 "use client"
+
 import Image from "next/image";
-import Header from "../components/Header";
-import { useRef, useState } from "react";
+import Header from "@/app/components/Header";
+import { useContext, useState } from "react";
+
+import { LandspireContext } from '@/app/context/contex'
+import { useRouter } from 'next/navigation'
+import { client } from '@/app/libs/sanity'
+import { contractABI, contractAddress } from '@/app/libs/constant'
+import { ethers } from 'ethers'
+
+import { pinJSONToIPFS, pinFileToIPFS, deleteFileToIPFS, deleteJSONToIPFS } from '@/app/libs/pinata'
+
+declare let window: any
+
+let metamask: any
+
+if (typeof window !== 'undefined') {
+  metamask = window.ethereum
+}
+
+interface Metadata {
+  name: string
+  certificates_id: string
+  nik: string
+  file: string
+}
+
+interface HeaderObject {
+  key: string | undefined
+  value: string | undefined
+}
+
+const getEthereumContract = async () => {
+
+  const provider = new ethers.BrowserProvider(metamask)
+  const accounts = await provider.listAccounts()
+  const signer = await provider.getSigner(accounts[0].address)
+
+  const transactionContract = new ethers.Contract(
+    contractAddress,
+    contractABI,
+    signer,
+  )
+
+  return transactionContract
+}
 
 const Formsertif = () => {
     const [change, isChange] = useState(false)
+    const { currentAccount, setAppStatus } = useContext(LandspireContext)
+    const router = useRouter()
+  
+    const [namaPemilik, setNamaPemilik] = useState('')
+    const [CertificatesID, setCertificatesID] = useState('')
+    const [CertificateFile, setCertificateFile] = useState<File>()
+    const [NIK, setNIK] = useState('')
+    const [ownershipRights, setOwnershipRight] = useState('')
+    const [dateOfIssuance, setDateOfIssuance] = useState('')
+    const [landAddress, setLandAddress] = useState('')
+    const [landArea, setLandArea] = useState('')
+    const [status, setStatus] = useState('initial')
+
+     const mint = async () => {
+      if (!namaPemilik || !NIK || !CertificateFile) return
+      setStatus('loading')
+  
+      const pinataMetaData = {
+        name: `${namaPemilik} - ${CertificatesID}`,
+      }
+  
+      const ipfsFileHash = await pinFileToIPFS(CertificateFile, pinataMetaData)
+  
+      const fileMetaData: Metadata = {
+        name: namaPemilik,
+        nik: NIK,
+        certificates_id: CertificatesID,
+        file: `ipfs://${ipfsFileHash}`,
+      }
+  
+      const pinataMetaDataJSON = {
+        "name": `${namaPemilik} - JSON`,
+        "nik": `${NIK}`,
+        "certificates_id": `${CertificatesID}`,
+        "file": `ipfs://${ipfsFileHash}`,
+        "attributes": [
+          {
+            "trait_type": "Classification",
+            "value": "Off-Chain (IPFS)"
+          }
+        ]
+      }    
+  
+      const ipfsJsonHash = await pinJSONToIPFS(fileMetaData, pinataMetaDataJSON)
+  
+      const contract = await getEthereumContract()
+  
+      try {
+        const transactionParameters = {
+          to: contractAddress,
+          from: currentAccount,
+          data: await contract.mint(currentAccount, `ipfs://${ipfsJsonHash}`),
+        }
+  
+        metamask.request({
+          method: 'eth_sendTransaction',
+          params: [transactionParameters],
+        })
+
+        const certificateDoc = {
+          _type: 'certificates',
+          _id: CertificatesID,
+          certificates_id: CertificatesID,
+          name_owner: namaPemilik,
+          nik: NIK,
+          ownership_rights: ownershipRights,
+          date_of_issuance: dateOfIssuance,
+          land_address: landAddress,
+          land_area: landArea,
+          timestamp: new Date(Date.now()).toISOString(),
+          author: {
+            _key: CertificatesID,
+            _ref: currentAccount,
+            _type: 'reference',
+          },
+        }
+    
+        await client.createIfNotExists(certificateDoc)
+    
+        await client
+          .patch(currentAccount)
+          .setIfMissing({ certificates: [] })
+          .insert('after', 'certificates[-1]', [
+            {
+              _key: CertificatesID,
+              _ref: CertificatesID,
+              _type: 'reference',
+            },
+          ])
+          .commit()
+  
+        setStatus('finished')
+  
+      } catch (error: any) {
+        console.log(error)
+        console.log("Menolak Pembayaran");
+  
+        if (ipfsFileHash) {
+          await deleteFileToIPFS(ipfsFileHash)
+        }
+  
+        if (ipfsJsonHash) {
+          await deleteJSONToIPFS(ipfsJsonHash)
+        }
+  
+        setStatus('finished')
+      }
+  
+  
+    }
 
     function dataMasuk(e) {
         const file = e.target;

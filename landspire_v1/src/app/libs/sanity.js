@@ -2,7 +2,7 @@ import {
     createClient
 } from "@sanity/client"
 
-const client = createClient({
+export const client = createClient({
     name: 'default',
     title: 'Landspire',
     projectId: 'uqsv68h3',
@@ -16,5 +16,3 @@ export async function testSanity() {
     console.log(`Number of data ${data}`); // set to `false` to by
     
 }
-
-export default client
